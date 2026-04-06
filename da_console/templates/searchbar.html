@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% block content %}
+<body class="fixed-top">
+<!--    <h4 align="center">Search Results</h4>-->
+<nav class="navbar navbar-expand-lg bg-white border-bottom border-2 border-primary ">
+    <div class="container-fluid px-4">
+        <span class="navbar-brand fw-bold text-primary">DOCTORS LIST</span>
+        <div class="collapse navbar-collapse justify-content-end">
+            <ul class="navbar-nav">
+                <li class="nav-item"><span class="nav-link text-dark"><a href="{% url 'doctor_list' %}" class="text-decoration-none text-dark">DASHBOARD</a></span></li>
+                <li class="nav-item"><span class="nav-link fw-bold text-primary">DOCTORS</span></li>
+                <li class="nav-item"><span class="nav-link text-dark">APPOINTMENTS</span></li>
+                <li class="nav-item"><span class="nav-link text-dark">PATIENTS</span></li>
+                <li class="nav-item"><span class="nav-link text-dark">REPORTS</span></li>
+                <li class="nav-item"><span class="nav-link text-dark">ADMIN</span></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!--    <div class="container">-->
+<!--    <div class="row justify-content-center m-4">-->
+        <div class="container-fluid">
+    <div class="row">
+        <!-- SIDEBAR -->
+        <div class="col-md-2 p-0 fs-5 border-end border-primary">
+            <div class="list-group list-group-flush ">
+                <div class="list-group-item bg-light fw-bold ">Main Menu</div>
+                <div class="list-group-item "><a href="{% url 'doctor_list' %}" class="text-decoration-none text-dark">Dashboard</a></div>
+                <div class="list-group-item text-primary fw-bold bg-light">DOCTORS</div>
+                <div class="list-group-item">Appointments</div>
+                <div class="list-group-item">Patients</div>
+                <div class="list-group-item">Reports</div>
+                <div class="list-group-item">Settings</div>
+            </div>
+        </div>
+        <div class="col-md-10 p-4">
+            <h2 class="border-bottom pb-2 mb-4 text-primary border-primary">DOCTORS LIST</h2>
+
+            <div class="row">
+                {% if docs %}
+                    {% for doc in docs %}
+                        <div class="col-md-4 col-lg-3 mb-4">
+                            <div class="card h-100" style="width:70%;">
+                                {% if doc.image %}
+                                    <img src="{{ doc.image.url }}" class="card-img-top" alt="{{ doc.full_name }}" style="height: 250px; object-fit: cover;">
+                                {% else %}
+                                    <div class="card-img-top bg-secondary d-flex align-items-center justify-content-center" style="height: 200px;">
+                                        <span class="text-white">No Image</span>
+                                    </div>
+                                {% endif %}
+                                <div class="card-body">
+                                    <h5 class="card-title text-primary">{{ doc.full_name }}</h5>
+                                    <h6 class="card-subtitle mb-2 text-muted">{{ doc.qualifications }}</h6>
+                                    <p class="card-text small">{{ doc.department }}</p>
+                                    <p class="card-text"><small class="text-muted">{{ doc.hospital_clinic_name }}</small></p>
+                                    <a href="{% url 'doctor' doc.pk %}" class="btn btn-primary btn-sm">More Info</a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="col-12">
+                        <p class="text-center text-muted">....Sorry. There are no doctors...</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+{% endblock %}

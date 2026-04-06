@@ -1,0 +1,289 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Doctor Information</title>
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        background: #f2f6fb;
+        margin: 0;
+        padding: 20px;
+    }
+
+    .card {
+        max-width: 900px;
+        margin: auto;
+        background: #ffffff;
+        border: 1px solid #cfd8e3;
+        border-radius: 6px;
+        overflow: hidden;
+    }
+
+    .header {
+        background: #0b5fa5;
+        color: #ffffff;
+        text-align: center;
+        padding: 10px;
+        font-size: 22px;
+        font-weight: bold;
+    }
+
+    .row {
+        display: flex;
+        border-bottom: 1px solid #e0e6ef;
+        margin-left: 2px;
+    }
+
+    .box {
+        flex: 1;
+        padding: 8px 8px;
+        font-weight: bold;
+        color: #0b5fa5;
+    }
+
+    .box span {
+        font-weight: normal;
+        color: #000;
+        margin-right: 6px;
+    }
+
+    .profile {
+        display: flex;
+        padding: 15px;
+        border-bottom: 1px solid #e0e6ef;
+    }
+
+    .profile img {
+        width: 120px;
+        height: 140px;
+        border-radius: 6px;
+        object-fit: cover;
+        margin-right: 20px;
+    }
+
+    .profile-details {
+        flex: 1;
+    }
+
+    .profile-details p {
+        margin: 6px 0;
+        border-bottom: 1px solid #e0e6ef;
+        padding-bottom: 6px;
+    }
+
+    .label {
+        color: #0b5fa5;
+        font-weight: bold;
+    }
+
+
+    .section {
+        display: flex;
+        border-bottom: 1px solid #e0e6ef;
+    }
+
+    .section-title {
+        width: 260px;
+        background: #0b5fa5;
+        color: #fff;
+        padding: 12px;
+        font-weight: bold;
+    }
+
+    .section-content {
+        flex: 1;
+        padding: 12px;
+    }
+
+    .simple-row {
+        display: flex;
+        border-bottom: 1px solid #e0e6ef;
+    }
+
+    .simple-row .label {
+        width: 260px;
+        padding: 10px 12px;
+        background: #0b5fa5;
+        color: #ffffff;
+    }
+.simple-row .a{
+    background-color: white;
+    color: blue;
+    width: 260px;
+    padding: 10px 12px;
+}
+    .simple-row .value {
+        flex: 1;
+        padding: 10px 12px;
+    }
+    .row {
+    display: flex;
+    border-bottom: 1px solid #e0e6ef;
+
+}
+
+.box {
+    flex: 1;
+    padding: 8px 8px;
+    font-weight: bold;
+    color: #0b5fa5;
+    margin-top:-8px;
+}
+
+/* vertical line between boxes */
+.box:first-child {
+    border-right: 1px solid #e0e6ef;
+}
+
+.box span {
+    font-weight: normal;
+    color: #000;
+    margin-left: 6px;
+}
+
+</style>
+</head>
+<body>
+
+<div class="card">
+
+    <div class="header">Doctor Information</div>
+<br>
+
+    <div class="row">
+    <div class="box" style="border:2px solid rgb(237, 229, 229);margin-left: 10px;">Doctor ID:<span>{{doctor.id}}
+
+    </span></div>
+    <div class="box"  style="border:2px solid rgb(237, 229, 229);margin-right: 20px;">Doctor Code:<span>{{doctor.id}}</span></div>
+</div>
+
+
+    <div class="profile"  style="border:2px solid rgb(237, 229, 229);margin:10px">
+        <img src="{{ doctor.image.url }}" alt="Doctor Photo">
+        <div class="profile-details">
+            <p><span class="label">Full Name:</span>{{doctor.full_name}}</p>
+            <p><span class="label">Gender:</span>{{doctor.gender}}</p>
+            <p><span class="label">Date of Birth:</span> {{doctor.date_of_birth}}</p>
+        </div>
+    </div>
+
+    <div class="section"  style="border:2px solid rgb(237, 229, 229);margin: 10px;">
+        <div class="section-title">Biography / About Doctor:</div>
+        <div class="section-content">
+        {{doctor.biography_about_doctor}}
+        </div>
+    </div>
+<div  style="border:2px solid rgb(237, 229, 229);margin: 10px;">
+    <div class="simple-row">
+        <div class="label">Primary Specialization:</div>
+        <div class="value">{{doctor.primary_specialization}}</div>
+    </div>
+
+    <div class="simple-row">
+        <div class="label">Sub-Specialization(s):</div>
+        <div class="value">{{doctor.sub_specializations}}</div>
+    </div>
+
+    <div class="simple-row">
+        <div class="label">Department:</div>
+        <div class="value">{{doctor.department}}</div>
+    </div>
+</div>
+<div  style="border:2px solid rgb(237, 229, 229);margin: 10px;">
+    <div class="simple-row">
+        <div class="label">Qualifications:</div>
+        <div class="value">{{doctor.qualifications}}</div>
+    </div>
+
+    <div class="simple-row">
+        <div class="label">Years of Experience:</div>
+        <div class="value">{{doctor.years_of_experience}}</div>
+    </div>
+
+    <div class="simple-row">
+        <div class="label">Medical Reg. Number:</div>
+        <div class="value">{{doctor.medical_registration_number}}</div>
+    </div>
+
+    <div class="simple-row">
+        <div class="label">Medical Council:</div>
+        <div class="value">{{doctor.medical_council_name}}</div>
+    </div>
+</div>
+<div  style="border:2px solid rgb(237, 229, 229);margin: 10px;">
+    <div class="simple-row">
+        <div class="label a">Official Email:</div>
+        <div class="value"><a href="">{{doctor.official_email}}</a></div>
+    </div>
+
+    <div class="simple-row">
+        <div class="label a">Mobile Number:</div>
+        <div class="value">+91-{{doctor.mobile_number}}</div>
+    </div>
+
+    <div class="simple-row">
+        <div class="label a">Alternate Contact:</div>
+        <div class="value">+91-{{doctor.alternate_contact_number}}</div>
+    </div>
+
+<!--    <div class="simple-row">-->
+<!--        <div class="label a">Consultation Languages:</div>-->
+<!--        <div class="value">{{doctor.consultation_languages}}</div>-->
+<!--    </div>-->
+<!--</div>-->
+<div  style="border:2px solid rgb(237, 229, 229);margin: 10px;">
+    <div class="simple-row">
+        <div class="label a">Emergency Contact:</div>
+        <div class="value">{{doctor.emergency_contact}}</div>
+    </div>
+
+<!--    <div class="simple-row">-->
+<!--        <div class="label a">Employment Type:</div>-->
+<!--        <div class="value">{{doctor.employement_type}}</div>-->
+<!--    </div>-->
+
+    <div class="simple-row">
+        <div class="label a">Hospital / Clinic:</div>
+        <div class="value">{{doctor.hospital_clinic_name}}</div>
+    </div>
+
+    <div class="simple-row">
+        <div class="label a">Branch / Location:</div>
+        <div class="value">{{doctor.branch_location}}</div>
+    </div>
+
+    <div class="simple-row">
+        <div class="label a">Room / Cabin Number:</div>
+        <div class="value">{{doctor.room_cabin_number}}</div>
+    </div>
+
+    <div class="simple-row">
+        <div class="label a">Shift Timings:</div>
+        <div class="value">{{doctor.shift_timings}}</div>
+    </div>
+
+    <div class="simple-row">
+        <div class="label a">On-Call Availability:</div>
+        <div class="value">{{doctor.on_call_availability}}</div>
+    </div>
+
+
+</div>
+
+</body>
+</html>
+
+
+{% endblock %}

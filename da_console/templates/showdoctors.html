@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+<!--doctors complete list-->
+{% block content %}
+{% load static %}
+{% if doctors %}
+<div class="mb-3">
+    <a href="{% url 'doctor_list' %}" class="btn btn-primary">VIEW DOCTORS_LIST</a>
+</div>
+
+<div class="container">
+    <div class="row">
+        {% for doctor in doctors %}
+        <div class="col-md-3">
+            <div class="card" style="width: 18rem;">
+                <a href="{% url 'doctor' doctor.id %}">
+                    <img src="{{ doctor.image.url }}" class="card-img-top" alt="..." height="300px">
+                </a>
+                <div class="card-body" style="height: 250px; margin-bottom:20px;">
+                    <h5 class="card-title">{{doctor.full_name}}</h5>
+                    <p class="card-subtitle">{{doctor.department}}</p>
+                    <p class="card-text">{{doctor.biography_about_doctor}}</p>
+                    <h6 class="card-text">{{doctor.mobile_number}}</h6>
+                    <a href="{% url 'doctor' doctor.id %}" class="btn btn-primary">details</a>
+                    <a href="{% url 'update' doctor.id %}">
+                        <button type="button" class="btn btn-primary">Update</button>
+                    </a>
+                    <a href="{% url 'delete' doctor.id %}">
+                        <button type="button" class="btn btn-danger">Delete</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Working Pagination -->
+<!-- Centered Pagination -->
+<div class="row m-5">
+    <div class="col-md-12">
+        {% if doctors.has_other_pages %}
+            <ul class="pagination justify-content-center">
+                <!-- Previous Button -->
+                {% if doctors.has_previous %}
+                    <li class="page-item">
+                        <a href="?page={{ doctors.previous_page_number }}" class="page-link">Previous</a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled">
+                        <span class="page-link">Previous</span>
+                    </li>
+                {% endif %}
+
+                <!-- Page Numbers -->
+                {% for i in doctors.paginator.page_range %}
+                    {% if doctors.number == i %}
+                        <li class="page-item active">
+                            <span class="page-link">{{ i }}</span>
+                        </li>
+                    {% else %}
+                        <li class="page-item">
+                            <a href="?page={{ i }}" class="page-link">{{ i }}</a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+
+                <!-- Next Button -->
+                {% if doctors.has_next %}
+                    <li class="page-item">
+                        <a href="?page={{ doctors.next_page_number }}" class="page-link">Next</a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled">
+                        <span class="page-link">Next</span>
+                    </li>
+                {% endif %}
+            </ul>
+        {% endif %}
+    </div>
+</div>
+
+{% else %}
+<p style="color:blue"><b>...No details found...</b></p>
+{% endif %}
+{% endblock %}
